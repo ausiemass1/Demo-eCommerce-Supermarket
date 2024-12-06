@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+
+    <%- include('../partials/admin_head.ejs')%>  
+ 
+    <title>users</title>
+</head>
+<body>
+    <header>
+        <%- include('../partials/admin_navbar1.ejs')%>
+        <%- include('../partials/user_navbar2.ejs')%>
+    </header>
+    <main>
+<div class="container">
+
+
+      <table>
+        <thead>
+          <tr>
+              <th>id</th>
+              <th>Item Name</th>
+              <th>Item Price</th>
+              <th>edit</th>
+              <th>delete</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            <% users.forEach(user=>{ %>
+          <tr>
+            <td><%= user.id%></td>
+            <td><%= user.username%></td>
+            <td><%= user.password%></td>
+            <td><a href="/admin/edit/<%= user.id%>">Edit</a></td>
+            <td><a href="/admin/delete/<%= user.id%>">Delete</a></td>
+          </tr>
+             
+       <% }) %> 
+        </tbody>
+      </table>
+    </div>
+    </main>
+   
+
+   <%- include('../partials/footer.ejs')%>
+</body>
+<%- include("../partials/admin_foot.ejs") %>
+</html>

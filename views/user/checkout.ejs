@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout Page</title>
+  <!-- Materialize CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+  <style>
+    .form-container {
+      max-width: 800px;
+      margin: 50px auto;
+    }
+    .checkout-header {
+      font-weight: bold;
+    }
+    .payment-section img {
+      width: 200px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container form-container">
+    <h4 class="checkout-header">Checkout</h4>
+
+    <form action="/process-checkout" method="POST">
+      <!-- Email Address -->
+      <div class="input-field">
+        <input id="email" type="email" name="email" required>
+        <label for="email">Please enter your email address</label>
+      </div>
+
+      <!-- Shipping Address Section -->
+      <h5>Shipping Address</h5>
+
+      <!-- Country / Region -->
+      <div class="input-field">
+        <select id="country" name="country" required>
+          <option value="" disabled selected>Choose your country</option>
+          <option value="US">United States</option>
+          <option value="CA">Canada</option>
+          <option value="UK">United Kingdom</option>
+        </select>
+        <label for="country">Country / Region</label>
+      </div>
+
+      <!-- First Name -->
+      <div class="input-field">
+        <input id="firstName" type="text" name="firstName" required>
+        <label for="firstName">First Name</label>
+      </div>
+
+      <!-- Last Name -->
+      <div class="input-field">
+        <input id="lastName" type="text" name="lastName" required>
+        <label for="lastName">Last Name</label>
+      </div>
+
+      <!-- Street Address -->
+      <div class="input-field">
+        <input id="streetAddress" type="text" name="streetAddress" required>
+        <label for="streetAddress">Street Address</label>
+      </div>
+
+      <!-- Apt, Unit, Building (Optional) -->
+      <div class="input-field">
+        <input id="apartment" type="text" name="apartment">
+        <label for="apartment">Apt, Unit, Building, Floor, etc. (optional)</label>
+      </div>
+
+      <!-- Zip Code -->
+      <div class="input-field">
+        <input id="zipCode" type="text" name="zipCode" required>
+        <label for="zipCode">Zip Code</label>
+      </div>
+
+      <!-- State -->
+      <div class="input-field">
+        <select id="state" name="state" required>
+          <option value="" disabled selected>Select state</option>
+          <option value="NY">New York</option>
+          <option value="CA">California</option>
+          <option value="TX">Texas</option>
+        </select>
+        <label for="state">State</label>
+      </div>
+
+      <!-- City -->
+      <div class="input-field">
+        <select id="city" name="city" required>
+          <option value="" disabled selected>Select city</option>
+          <option value="New York City">New York City</option>
+          <option value="Los Angeles">Los Angeles</option>
+          <option value="Houston">Houston</option>
+        </select>
+        <label for="city">City</label>
+      </div>
+
+      <!-- Payment Section -->
+      <h5>Payment Information</h5>
+      <p>Temu protects your card information:</p>
+      <ul>
+        <li>Temu follows PCI DSS for secure card data handling</li>
+        <li>Card information is encrypted</li>
+        <li>Temu never sells your card information</li>
+      </ul>
+      <div class="payment-section">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Credit_card_icons.svg" alt="Payment Methods">
+      </div>
+
+      <!-- Submit Button -->
+      <div class="mt-4">
+        <button type="submit" class="btn waves-effect waves-light">Continue to Payment</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Initialize Materialize components
+      const selects = document.querySelectorAll('select');
+      M.FormSelect.init(selects);
+    });
+  </script>
+</body>
+</html>

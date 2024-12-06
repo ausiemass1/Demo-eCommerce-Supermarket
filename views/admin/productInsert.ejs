@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>register</title>
+    <%- include("../partials/admin_head.ejs") %>
+  </head>
+
+  <body>
+    <header>
+      <!-- place navbar here -->
+
+      <%- include("../partials/admin_navbar1.ejs") %> <%-
+      include("../partials/user_navbar2.ejs") %>
+    </header>
+    <main>
+      <div class="container in_prod">
+        <br />
+        <h3 class="center-align">Insert Poduct</h3>
+        <br />
+        <%- include("../partials/flash.ejs") %>
+        <form
+          action="/admin/insertProduct"
+          method="post"
+          class="container"
+          enctype="multipart/form-data"
+        >
+          <div class="input-field col s12">
+            <input
+              placeholder="Placeholder"
+              id="product_name"
+              name="product_name"
+              type="text"
+              class="validate"
+              required
+            />
+            <label for="product_name">Product Name</label>
+          </div>
+          <div class="input-field col s12">
+            <input
+              placeholder="Placeholder"
+              id="description"
+              name="description"
+              type="text"
+              class="validate"
+              required
+            />
+            <label for="description">Description</label>
+          </div>
+          <div class="input-field col s12">
+            <input
+              placeholder="keywords"
+              id="keywords"
+              name="keywords"
+              type="text"
+              class="validate"
+              required
+            />
+            <label for="Keywords">Keywords</label>
+          </div>
+          <div class="input-field col s12">
+            <select name="category_id">
+              <option value="" disabled selected>Select Category</option>
+              <% category.forEach(category => { %>
+                <option value="<%= category.category_id %>"><%= category.category_name %></option>
+              <% }) %>
+            </select>
+            
+            <label for="category">Category</label>
+          </div>
+       
+            <div class="input-field col s12">
+              <select   name="brand_id">
+                <option value="" disabled selected  >Select Brand</option>
+                <% brand.forEach(brand =>{%>
+                  <option value="<%= brand.brand_id %>"   ><%= brand.brand_name %></option>
+                <%})%>
+              </select>
+              <label for="brand">Brand</label>
+            </div>
+           
+        
+          <div class="input-field col s12">
+            <input
+              placeholder="$0.00"
+              id="price"
+              name="price"
+              type="number"
+              step="0.01"
+              class="validate"
+            />
+            <label for="brand">Price</label>
+          </div>
+          <div class="input-field file-field  col s12">
+            <div class="btn red lighten-2">
+              <span>Image</span>
+              <input id="image" name="image" type="file" class="validate" />
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" />
+            </div>
+          </div>
+
+          <button
+            class="btn red lighten-2 waves-effect waves-light white-text"
+            type="submit"
+          >
+            Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </form>
+        <br /><br /><br />
+      </div>
+    </main>
+
+    <!-- place footer here -->
+    <%- include("../partials/footer.ejs") %>
+  </body>
+  <%- include("../partials/admin_foot.ejs") %>
+</html>

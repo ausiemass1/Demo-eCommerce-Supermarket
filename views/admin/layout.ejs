@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>register</title>
+    <%- include("../partials/admin_head.ejs") %>
+  </head>
+
+  <body>
+    <header>
+      <!-- place navbar here -->
+
+      <%- include("../partials/admin_navbar1.ejs") %> <%-
+      include("../partials/user_navbar2.ejs") %>
+    </header>
+    <main><!-- Scrollable Side Navigation -->
+        <ul id="mobile-nav" class="sidenav sidenav-fixed">
+            <li><a href="#!">Home</a></li>
+            <li><a href="#!">About</a></li>
+            <li><a href="#!">Services</a></li>
+            <li><a href="#!">Contact</a></li>
+            <li><a href="#!">FAQ</a></li>
+            <li><a href="#!">Blog</a></li>
+            <li><a href="#!">Careers</a></li>
+            <li><a href="#!">Help Center</a></li>
+            <li><a href="#!">Privacy Policy</a></li>
+            <li><a href="#!">Terms of Service</a></li>
+          </ul>
+          
+          <!-- Main Content -->
+          <div class="content">
+            <h1>Welcome to My App</h1>
+            <p>This is a demo of a scrollable side navigation menu using Materialize CSS.</p>
+          </div></main>
+
+    <!-- place footer here -->
+    <%- include("../partials/footer.ejs") %>
+  </body>
+  <%- include("../partials/admin_foot.ejs") %>
+</html>

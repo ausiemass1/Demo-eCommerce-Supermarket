@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Products</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Materialize CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Materialize Icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <style>
+      .hidden {
+        display: none !important;
+      }
+      .card {
+        border-radius: 20px;
+      }
+      .hover-zoom {
+        transition: transform 0.3s ease;
+      }
+      .hover-zoom:hover {
+        transform: scale(1.1);
+      }
+      .hover-button {
+        background-color: #ff4081;
+        color: white;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+      }
+      .hover-button:hover {
+        background-color: #ff80ab;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <%- include("../partials/user_navbar1.ejs") %>
+      <%- include("../partials/user_navbar2.ejs") %>
+    </header>
+
+    <main>
+      <div class="container">
+        <h1 class="center-align">Products</h1>
+        <div class="input-field">
+          <input
+            type="text"
+            id="search"
+            placeholder="Search products by title..."
+            onkeyup="filterProducts()"
+          />
+        </div>
+
+        <div class="row">
+          <% if (results && results.length > 0) { %>
+            <% results.forEach(item => { %>
+              <div class="col s12 m6 l4 product-card">
+                <div class="card large">
+                  <div class="card-image hover-zoom">
+                    <img
+                      src="../../public/uploads/products/<%= item.image %>"
+                      alt="<%= item.product_name %>"
+                    />
+                  </div>
+                  <div class="card-content">
+                    <span class="card-title grey-text text-darken-4">
+                      <%= item.product_name %>
+                    </span>
+                    <p><%= item.description %></p>
+                    <p>Price: $<%= item.price %></p>
+                  </div>
+                  <div class="card-action center-align">
+                    <form action="/add-to-cart/<%= item.id %>" method="POST">
+                      <input
+                        type="submit"
+                        value="Buy Now"
+                        class="btn hover-button"
+                      />
+                    </form>
+                  </div>
+                </div>
+              </div>
+            <% }); %>
+          <% } else { %>
+            <p>No products available.</p>
+          <% } %>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <%- include("../partials/footer.ejs") %>
+    </footer>
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <!-- Custom JS for Filtering -->
+    <script>
+      function filterProducts() {
+        const searchInput = document.getElementById('search');
+        const searchText = searchInput.value.toLowerCase();
+        const productCards = document.querySelectorAll('.product-card');
+
+        productCards.forEach((card) => {
+          const title = card.querySelector('.card-title').textContent.toLowerCase();
+          if (title.includes(searchText)) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

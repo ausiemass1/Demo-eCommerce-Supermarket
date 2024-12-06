@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+
+    <%- include('../partials/admin_head.ejs')%>  
+ 
+    <title>users</title>
+</head>
+<body>
+    <header>
+        <%- include('../partials/admin_navbar1.ejs')%>
+        <%- include('../partials/user_navbar2.ejs')%>
+    </header>
+    <main>
+
+<div class="container"><br><br>
+    <div class="container"><br>
+        <h2 class="center-align">Update Category</h3><br>
+            <%- include("../partials/flash.ejs")  %>
+        <form action="/admin/editcategory/<%= results.category_id %>" method="post" style="width: 50%; margin: auto;">
+
+          <label for="username">Brand Name:</label>
+          <input type="text" name="category_name" value="<%= results.category_name %>"  required/><br /><br />
+
+          <input type="submit" value="Update" class="btn btn-primary" />
+      
+        </form>
+    </div><br>
+    </main>
+   
+
+   <%- include('../partials/footer.ejs')%>
+</body>
+<%- include("../partials/admin_foot.ejs") %>
+</html>

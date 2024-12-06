@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+
+    <%- include('../partials/admin_head.ejs')%>  
+ 
+    <title>users</title>
+</head>
+<body>
+    <header>
+        <%- include('../partials/admin_navbar1.ejs')%>
+        <%- include('../partials/user_navbar2.ejs')%>
+    </header>
+    <main>
+
+      <div class="container"><br><br>
+       
+          <h3 class="center-align">All Categories</h3>
+          <%- include("../partials/flash.ejs")  %>
+      <table>
+          <thead>
+            <tr>
+                <th>id</th>
+                <th>Category Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+          </thead>
+  
+          <tbody>
+            <%  results.forEach(item =>{ %>
+              <tr>
+                <td><%= item.category_id %></td>
+                <td><%= item.category_name %></td>
+                
+                <td><a href="/admin/editcategory/<%= item.category_id %>"><i class="material-icons blue-text">edit</i></a></td>
+                <td><a href="/admin/deletecategory/<%= item.category_id %>"><i class="material-icons red-text">delete</i></a></td>
+              </tr>
+           <% }) %>
+            
+          </tbody>
+        </table>
+      </div><br><br>
+    </main>
+   
+
+   <%- include('../partials/footer.ejs')%>
+</body>
+<%- include("../partials/admin_foot.ejs") %>
+</html>

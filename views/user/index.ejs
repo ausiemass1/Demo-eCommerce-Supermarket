@@ -1,0 +1,191 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<%- include("../partials/user_head.ejs")  %>      
+  <title>home</title>
+  <style>
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      padding: 15px;
+    }
+
+    .card {
+      border-radius: 20px;
+    }
+
+    /* Zoom effect on the image */
+    .hover-zoom {
+      transition: transform 0.3s ease;
+    }
+
+    .hover-zoom:hover {
+      transform: scale(1.1);
+    }
+
+    /* Animation for the "Buy Now" button */
+    .hover-button {
+      background-color: #ff4081;
+      color: white;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .hover-button:hover {
+      background-color: #ff80ab;
+      transform: scale(1.05);
+    }
+
+    /* Align text and input fields */
+    input[type="number"],
+    input[type="text"] {
+      width: 100%;
+      margin: 5px 0;
+      text-align: center;
+    }
+
+    .card-image img {
+      height: 200px;
+      object-fit: cover;
+    }
+
+    /* Star rating styles */
+    .product-rating {
+      display: flex;
+      justify-content: center;
+      margin: 10px 0;
+    }
+
+    .product-rating .star {
+      color: gold;
+      font-size: 1.5rem;
+      margin: 0 2px;
+      transition: transform 0.2s ease;
+    }
+
+    /* Add a slight bounce animation when hovering over stars */
+    .product-rating .star:hover {
+      transform: scale(1.2);
+    }
+
+    .goog-te-banner-frame,
+    .goog-tooltip,
+    .goog-te-gadget-icon {
+      display: none !important;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <%- include("../partials/user_navbar1.ejs")  %>
+  </header>
+
+  <main>
+    <div class="headerImage">
+      <h1 class="white-text text-lighten-5">demo shop</h1>
+      </div>
+      <%- include("../partials/user_navbar2.ejs") %>
+  <!-- grid system -->
+  <div class="container">
+    <div id="google_translate_element"></div>
+
+    <h3 style="text-align: center" class="blue-text darken-5" >Featured Products</h3>
+    <div class="carousel">
+      <a class="carousel-item responsive-img" href="#one!"><img src="../../public/uploads/products/1-1-1.jpg"></a>
+      <a class="carousel-item responsive-img" href="#two!"><img src="../../public/uploads/products/3-3.jpg"></a>
+      <a class="carousel-item responsive-img" href="#three!"><img src="../../public/uploads/products/3-3.jpg"></a>
+      <a class="carousel-item responsive-img" href="#four!"><img src="../../public/uploads/products/6-1.jpg"></a>
+      <a class="carousel-item responsive-img" href="#five!"><img src="../../public/uploads/products/3-3.jpg"></a>
+    </div>
+
+    <div class="row">
+      <% if (results.length > 0) { %> <% results.forEach(item => { %>
+
+      <div class="col s12 m6 l4">
+        <div class="card large">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img
+              class="activator card-img-top hover-zoom"
+              src="../../public/uploads/products/<%= item.image %>"
+              alt="<%= item.product_name %>"
+            />
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4">
+              <%= item.product_name %>
+              <i class="material-icons right">more_vert</i>
+            </span>
+            <!-- Product Rating Stars -->
+            <div class="product-rating">
+              <i class="material-icons notranslate star">star</i>
+              <i class="material-icons notranslate star">star</i>
+              <i class="material-icons notranslate star">star</i>
+              <i class="material-icons notranslate star">star_half</i>
+              <i class="material-icons notranslate star">star_outline</i>
+            </div>
+            <form action="/add-to-cart/<%= item.id %>" method="post">
+              <div class="row">
+                <div class="col s12 center-align">
+                  <input
+                    type="submit"
+                    value="Buy Now"
+                    class="btn hover-button"
+                  />
+                </div>
+                <div class="col s6">
+                  <label for="quantity">Qty:</label>
+                  <input
+                    type="number"
+                    name="quantity"
+                    id="quantity"
+                    placeholder="Qty"
+                    min="1"
+                    value="1"
+                    class="center-align"
+                    style="height: 2rem; text-align: center"
+                  />
+                </div>
+                <div class="col s6">
+                  <label for="price">Price:</label>
+                  <input
+                    type="text"
+                    id="price"
+                    placeholder="Price"
+                    value="$<%= item.price %>"
+                    style="height: 2rem; text-align: center"
+                    disabled
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">
+              <%= item.product_name %>
+              <i class="material-icons right">close</i>
+            </span>
+            <p><%= item.description %></p>
+          </div>
+        </div>
+      </div>
+
+      <% }) %> <% } else { %>
+      <p>No products found.</p>
+      <% } %>
+    </div>
+  </div>
+
+ 
+  </main>
+  <%-  include("../partials/footer")  %>
+</body>
+<%-  include("../partials/user_foot.ejs") %>
+</html>
+
+
+
+

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>register</title>
+    <%- include("../partials/admin_head.ejs") %>
+  </head>
+
+  <body>
+    <header>
+        <!-- place navbar here -->
+   
+        <%- include("../partials/admin_navbar1.ejs") %>
+        <%- include("../partials/user_navbar2.ejs") %>
+    </header>
+   <main>
+    <div class="container in_prod">
+        <br>
+        <h3 class="center-align">Edit Poduct</h3><br>
+        <%- include("../partials/flash.ejs")  %>
+         <form action="/admin/updateproduct/<%= results.id %>" method="post" class="container" enctype="multipart/form-data">
+           <div class="input-field col s12">
+                <input
+                  placeholder="Placeholder"
+                  id="product_name"
+                  name="product_name"
+                  type="text"
+                  value="<%= results.product_name %>"
+                  class="validate"
+                  required
+                />
+                <label for="product_name">Product Name</label>
+              </div>
+          <div class="input-field col s12">
+            <input
+              placeholder="Placeholder"
+              id="description"
+              name="description"
+              type="text"
+              value="<%= results.description %>"
+              class="validate"
+              required
+            />
+            <label for="description">Description</label>
+          </div>
+          <div class="input-field col s12">
+            <input
+              placeholder="keywords"
+              id="keywords"
+              name="keywords"
+              type="text"
+              value="<%= results.keywords %>"
+              class="validate"
+              required
+            />
+            <label for="Keywords">Keywords</label>
+          </div>
+          <div class="input-field col s12">
+            <input
+              placeholder="Category"
+              id="category"
+              name="category_id"
+              value="<%= results.category_id %>"
+              type="number"
+              class="validate"
+              required
+            />
+            <label for="category">Category</label>
+          </div>
+          <div class="input-field col s12">
+            <input
+              placeholder="brand"
+              id="brand"
+              name="brand_id"
+              value="<%= results.brand_id %>"
+              type="number"
+              class="validate"
+     
+            />
+            <label for="brand">Brand</label>
+          </div> 
+          <div class="input-field col s12">
+            <input
+              placeholder="$0.00"
+              id="price"
+              name="price"
+              value="<%= results.price %>"
+              type="number"
+              step="0.01"
+              class="validate"
+     
+            />
+            <label for="brand">Price</label>
+          </div> 
+          <div class="input-field col s12">
+            <!-- <label for="image">Image 1</label> -->
+            <input
+              id="image"
+              name="image"
+              type="file"
+              class="validate"
+            />
+         
+          </div>
+
+          <button class="btn blue waves-effect waves-light white-text" type="submit">Update
+            <i class="material-icons right">send</i>
+          </button>
+        </form><br><br><br>
+
+        
+      </div>
+    </main>
+    
+        <!-- place footer here -->
+    <%- include("../partials/footer.ejs") %>
+   
+      
+
+  </body>
+  <%- include("../partials/admin_foot.ejs") %>
+
+</html>

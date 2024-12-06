@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>register</title>
+    <%- include("../partials/user_head.ejs") %>
+
+    <style>
+      nav a {
+    margin: 0 10px;
+    white-space: nowrap; /* Prevents text from breaking into multiple lines */
+}
+    </style>
+  </head>
+
+  <body>
+    <header>
+        <!-- place navbar here -->
+   
+        <%- include("../partials/user_navbar1.ejs") %>
+        <%- include("../partials/user_navbar2.ejs") %>
+    </header>
+   <main>
+    <br>
+      <div class="container">
+        <div class="container">
+          <div id="google_translate_element"></div>
+
+          <h3>Customer Registration</h3>
+          <form action="/users/register" method="post">
+            <label for="username">Name:</label>
+            <input type="text" name="username" /><br /><br />
+
+            <label for="surname">Surname:</label>
+            <input type="text" name="surname" /><br /><br />
+
+            <label for="phone">Phone:</label>
+            <input type="text" name="phone" /><br /><br />
+
+            <label for="email">Email:</label>
+            <input type="text" name="email" /><br /><br />
+
+            <label for="password">Password:</label>
+            <input type="password" name="password" /><br /><br />
+
+            <label for="password">Confirm Password:</label>
+            <input type="password" name="confirm_password" /><br /><br />
+
+            <input type="submit" value="Register" class="btn btn-primary"/>
+
+            <p>Are you registered? <a href="/auth/login">Login</a></p>
+          </form>
+        </div>
+      </div><br><br>
+    </main>
+    
+        <!-- place footer here -->
+    <%- include("../partials/footer.ejs") %>
+   
+      
+
+  </body>
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement(
+        { pageLanguage: 'en', includedLanguages: 'es,fr,de,it,zh-CN', layout: google.translate.TranslateElement.InlineLayout.SIMPLE },
+        'google_translate_element'
+      );
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+
+  <!-- reload google transplate -->
+  <script>
+    function reloadGoogleTranslate() {
+  var event = document.createEvent('HTMLEvents');
+  event.initEvent('DOMSubtreeModified', true, true);
+  document.body.dispatchEvent(event);
+}
+reloadGoogleTranslate()
+
+  </script>
+  
+  <%- include("../partials/user_foot.ejs") %>
+
+</html>

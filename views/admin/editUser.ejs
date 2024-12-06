@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>login</title>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Compiled and minified materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- materialise icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- font awesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- custom css styles -->
+    <link rel="stylesheet" href="../../public/css/styles.css">
+
+
+  </head>
+
+  <body>
+    <header>
+      <!-- place navbar here -->
+      <%- include("../partials/user_navbar1.ejs") %> 
+      <%- include("../partials/user_navbar2.ejs") %>
+    </header>
+
+    <main>
+        <br>
+          <div class="container">
+            <div class="container">
+          
+    
+          
+              <h3>Customer Registration</h3>
+              <form action="/admin/update/<%= users.id %>" method="post">
+                <label for="username">Name:</label>
+                <input type="text" name="username" value="<%= users.username %>" /><br /><br />
+    
+                <label for="surname">Surname:</label>
+                <input type="text" name="surname" value="<%= users.surname %>" /><br /><br />
+    
+                <label for="phone">Phone:</label>
+                <input type="text" name="phone" value="<%= users.phone %>"  /><br /><br />
+    
+                <label for="email">Email:</label>
+                <input type="text" name="email" value="<%= users.email %>" /><br /><br />
+    
+                <input type="submit" value="Update" class="btn btn-primary"/>
+    
+    
+              </form>
+            </div>
+          </div><br><br>
+        </main>
+
+
+    <!-- place footer here -->
+    <%- include("../partials/footer.ejs") %>
+  </body>
+   <!-- jquery -->
+   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+   <!-- Compiled and minified JavaScript -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      <!-- D3 script for ploting graphs -->
+   <script src="https://d3js.org/d3.v7.min.js"></script>
+ 
+   <!--------------------------------- custom js script ----------------------------------------->
+   <script src="../../public/js/script.js"></script>
+</html>
