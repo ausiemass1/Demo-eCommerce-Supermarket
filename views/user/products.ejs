@@ -98,12 +98,9 @@
         display: none !important;
       }
 
-
-    
-        .hidden {
-            display: none;
-        }
-
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
 
@@ -115,22 +112,17 @@
     </header>
 
     <main>
-      <input type="text" id="search" placeholder="Search products..." onkeyup="myFunction()" />
+      <input
+        type="text"
+        id="search"
+        placeholder="Search products..."
+        onkeyup="myFunction()"
+      />
 
-   <!-- Pagination Controls -->
-   <ul class="pagination center-align">
-    <% if(currentPage > 1 ){%>
-      <li><a href="/user/products/?page=<%=currentPage-1%>"><i class="material-icons">chevron_left</i></a></li>
-      <%}%>
-    <% for (let i = 1; i <= totalPages; i++) { %>
-      <li class="<%= currentPage === i ? 'active' : 'waves-effect' %>">
-        <a href="?page=<%= i %>"><%= i %></a>
-      </li>
-    <% } %>
-    <% if(currentPage < totalPages ){%>
-      <li><a href="/user/products/?page=<%=currentPage+1%>"><i class="material-icons">chevron_right</i></a></li>
-      <%}%>
-  </ul><br>
+      <!-- Pagination Controls -->
+  <!-- Pagination Controls -->
+  <%- include('../partials/pagination')%>
+      <br />
       <!-- grid system -->
       <div class="container">
         <div id="google_translate_element"></div>
@@ -215,20 +207,9 @@
       </div>
       <br /><br />
 
-       <!-- Pagination Controls -->
-   <ul class="pagination center-align">
-    <% if(currentPage > 1 ){%>
-      <li><a href="/user/products/?page=<%=currentPage-1%>"><i class="material-icons">chevron_left</i></a></li>
-      <%}%>
-    <% for (let i = 1; i <= totalPages; i++) { %>
-      <li class="<%= currentPage === i ? 'active' : 'waves-effect' %>">
-        <a href="?page=<%= i %>"><%= i %></a>
-      </li>
-    <% } %>
-    <% if(currentPage < totalPages ){%>
-      <li><a href="/user/products/?page=<%=currentPage+1%>"><i class="material-icons">chevron_right</i></a></li>
-      <%}%>
-  </ul><br>
+      <!-- Pagination Controls -->
+     <%- include('../partials/pagination')%>
+      <br />
     </main>
 
     <!-- place footer here -->
@@ -244,25 +225,23 @@
   <!--------------------------------- custom js script ----------------------------------------->
   <script src="../../public/js/script.js"></script>
 
-
-  <!-- cart functinality -->
-   <!-- Search Function Script -->
-   <script>
+  <!-- Search Function Script -->
+  <script>
     function myFunction() {
-        const searchInput = document.getElementById('search');
-        const searchText = searchInput.value.toLowerCase();
-        const productItems = document.querySelectorAll('.card');
-console.log(searchText)
-        productItems.forEach(item => {
-            const name = item.querySelector('card-title ').textContent.toLowerCase();
-       
-            // const name = "Lettuce"
-            if (name.includes(searchText)) {
-                item.classList.remove('hidden');
-            } else {
-                item.classList.add('hidden');
-            }
-        });
+      const searchInput = document.getElementById("search");
+      const searchText = searchInput.value.toLowerCase();
+      const productItems = document.querySelectorAll(".card");
+      console.log(searchText);
+      productItems.forEach((item) => {
+        const name = item
+          .querySelector("card-title ")
+          .textContent.toLowerCase();
+        if (name.includes(searchText)) {
+          item.classList.remove("hidden");
+        } else {
+          item.classList.add("hidden");
+        }
+      });
     }
-</script>
+  </script>
 </html>
