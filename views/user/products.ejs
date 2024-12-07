@@ -116,76 +116,21 @@
 
     <main>
       <input type="text" id="search" placeholder="Search products..." onkeyup="myFunction()" />
-<!-- cart functionality -->
-      <!-- <div id="cart-sidebar" class="cart-sidebar hidden hide-on-med-and-down">
-        <br /><br />
-      
-        <table class="responsive-table">
-          <thead>
-            <tr>
-              <th>Product Title</th>
-              <th>Product Image</th>
-              <th>Quantity</th>
-              <th>Unit Price</th>
-              <th>Total price</th>
-              <th colspan="2">operations</th>
-            </tr>
-          </thead>
 
-          <tbody>
-            <% cart.forEach(item=>{%>
-            <tr>
-              <td><%= item.product_name %></td>
-              <td>
-                <img
-                  src="../../public/uploads/products/<%= item.image %>"
-                  alt="image"
-                  style="width: 5rem; object-fit: contain"
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  value="<%= item.quantity %>"
-                  style="width: 3rem"
-                  min="1"
-                />
-              </td>
-              <td><%= item.price %></td>
-              <td><%= (item.price*item.quantity).toFixed(2) %></td>
-              <td>update</td>
-              <td><a href="/remove-from-cart/<%= item.id %>">remove</a></td>
-            </tr>
-            <% }) %>
-          </tbody>
-        </table>
-
-        <br /><br />
-
-        <h3>Subtotal: $<%= totalPrice.toFixed(2) %></h3>
-
-        <div class="checkout_continue">
-          <a
-            href="/payment"
-            class="btn waves-effect waves-light"
-            type="submit"
-            name="action"
-            >Checkout
-            <i class="material-icons right">send</i>
-          </a>
-
-          <a
-            href="/"
-            class="btn waves-effect waves-light"
-            type="submit"
-            name="action"
-            >Continue Shopping
-            <i class="material-icons right"> shopping_basket</i>
-          </a>
-        </div>
-      </div> -->
-      <br />
-
+   <!-- Pagination Controls -->
+   <ul class="pagination center-align">
+    <% if(currentPage > 1 ){%>
+      <li><a href="/user/products/?page=<%=currentPage-1%>"><i class="material-icons">chevron_left</i></a></li>
+      <%}%>
+    <% for (let i = 1; i <= totalPages; i++) { %>
+      <li class="<%= currentPage === i ? 'active' : 'waves-effect' %>">
+        <a href="?page=<%= i %>"><%= i %></a>
+      </li>
+    <% } %>
+    <% if(currentPage < totalPages ){%>
+      <li><a href="/user/products/?page=<%=currentPage+1%>"><i class="material-icons">chevron_right</i></a></li>
+      <%}%>
+  </ul><br>
       <!-- grid system -->
       <div class="container">
         <div id="google_translate_element"></div>
@@ -269,6 +214,21 @@
         </div>
       </div>
       <br /><br />
+
+       <!-- Pagination Controls -->
+   <ul class="pagination center-align">
+    <% if(currentPage > 1 ){%>
+      <li><a href="/user/products/?page=<%=currentPage-1%>"><i class="material-icons">chevron_left</i></a></li>
+      <%}%>
+    <% for (let i = 1; i <= totalPages; i++) { %>
+      <li class="<%= currentPage === i ? 'active' : 'waves-effect' %>">
+        <a href="?page=<%= i %>"><%= i %></a>
+      </li>
+    <% } %>
+    <% if(currentPage < totalPages ){%>
+      <li><a href="/user/products/?page=<%=currentPage+1%>"><i class="material-icons">chevron_right</i></a></li>
+      <%}%>
+  </ul><br>
     </main>
 
     <!-- place footer here -->

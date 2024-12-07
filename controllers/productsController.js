@@ -104,3 +104,48 @@ exports.insertproduct = async (req, res) => {
 
   res.redirect("/admin/insertproduct");
 };
+
+
+//pagenation 
+
+
+
+// exports.getProductsPage = (req, res) => {
+//   const page = parseInt(req.query.page) || 1; // Default to page 1
+//   const limit = 6; // Limit products per page
+//   const offset = (page - 1) * limit;
+
+//   // Fetch paginated products
+//   productsModel.getPaginatedProducts(limit, offset, (err, products) => {
+//     if (err) return res.status(500).send(err);
+
+//     // Fetch total product count for pagination
+//     productsModel.getTotalProductCount((err, total) => {
+//       if (err) return res.status(500).send(err);
+
+//       const totalPages = Math.ceil(total / limit);
+//       res.render('user/products', { products, currentPage: page, totalPages });
+//     });
+//   });
+// };
+
+
+exports.getAllProducts = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page, 10) || 1; // Default to page 1
+    const limit = 6; // Number of products per page
+    const offset = (page - 1) * limit; // Calculate offset for pagination
+
+    // Fetch paginated products and total product count
+    const results = await productsModel.getPaginatedProducts(limit, offset);
+    const totalProducts = await productsModel.getTotalProductCount();
+
+    // Calculate total pages
+    const totalPages = Math.ceil(totalProducts / limit);
+
+    // Render the products page
+    res.render('user/products', { results, currentPage: page, totalPages });
+  } catch (error) {
+    res.status(500).send(error.message || 'An error occurred while fetching products');
+  }
+};

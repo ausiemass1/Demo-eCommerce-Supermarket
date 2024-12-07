@@ -63,3 +63,20 @@ exports.getProductForm = async ()=>{
   return {brand, category};
 }
 
+//pagination logic
+
+
+// Fetch paginated products
+exports.getPaginatedProducts = async (limit, offset) => {
+  const sql = 'SELECT * FROM products LIMIT ? OFFSET ?';
+  const [rows] = await conn.query(sql, [limit, offset]); // Destructure rows from the query result
+  return rows; // Return the fetched rows
+};
+
+// Fetch total product count
+exports.getTotalProductCount = async () => {
+  const sql = 'SELECT COUNT(*) AS total FROM products';
+  const [[{ total }]] = await conn.query(sql); // Destructure total from the nested query result
+  return total; // Return the total count
+};
+

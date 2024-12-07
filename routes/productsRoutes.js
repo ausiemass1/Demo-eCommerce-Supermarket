@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productsController')
 const homeController = require('../controllers/homeController')
+const {isAuthenticated} = require('../middlewares/authMiddleware')
 
-router.get('/user/products', homeController.getPagenation)
+router.get('/user/products', productController.getAllProducts)
 router.get('/admin/products', productController.getAllProductForAdmin)
 router.get('/admin/insertProduct', productController.getProductForm)
 router.post('/admin/insertProduct', productController.insertproduct)
