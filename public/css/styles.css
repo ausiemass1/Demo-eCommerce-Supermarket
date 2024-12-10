@@ -352,3 +352,7 @@ width: 100%;
   height: 100%;
   object-fit: cover; /* Maintain aspect ratio */
 }
+
+.nav-wrapper {
+  box-shadow: 0 3px 8px -1px #0000001a, 0 1px 4px 0 #0000001a;
+}

@@ -9,5 +9,6 @@ router.post("/admin/register", userController.registerUser);
 router.get('/admin/edit/:id', userController.getEditForm)
 router.post('/admin/update/:id', userController.updateUser)
 router.get('/admin/delete/:id', userController.deleteUser)
+router.post('/users/register', )
 
 module.exports = router;

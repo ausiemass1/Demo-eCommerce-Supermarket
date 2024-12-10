@@ -28,7 +28,7 @@ exports.registerUser = async (req, res) => {
     );
 
     res.send(
-      `<script>alert("Data inserted successfully"); window.location.href = "/users"; </script>`
+      `<script>alert("Data inserted successfully"); window.location.href = "/admin/users"; </script>`
     );
   } else {
     req.flash("error_msg", "Passwords do not match");
