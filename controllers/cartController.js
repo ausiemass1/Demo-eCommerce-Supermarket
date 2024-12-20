@@ -47,7 +47,7 @@ exports.addToCart = async (req, res) => {
 };
 
 exports.payment =  (req,res)=>{
-  res.render('user/paymentOptions');
+  res.render('user/payment');
 }
 
 exports.removeFromCart = (req, res) => {
