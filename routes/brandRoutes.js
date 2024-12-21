@@ -1,7 +1,9 @@
-const express = require('express');
+import express from 'express';
+import * as brandController from '../controllers/brandController.js';
+import * as  isAuthenticated  from '../middlewares/authMiddleware.js';
+
 const router = express.Router();
-const brandController = require('../controllers/brandController');
-const { isAuthenticated } = require("../middlewares/authMiddleware");
+
 
 router.get('/admin/brand',  brandController.getBrands);
 router.get('/admin/editbrand/:id', brandController.editBrand)
@@ -10,4 +12,4 @@ router.get('/admin/deletebrand/:id', brandController.deleteBrand)
 router.get('/admin/insertbrand',  brandController.insertBrandForm)
 router.post('/admin/insertbrand', brandController.insertBrand)
 
-module.exports = router;
+export default router

@@ -1,6 +1,6 @@
-const conn = require("../config/dbConfig");
+import conn from "../config/dbConfig.js";
 
-exports.getAllUsers = async () => {
+export const getAllUsers = async () => {
   try {
     const [rows] = await conn.query("SELECT * FROM users"); // Destructure rows from the query result
     return rows; // Return the rows directly
@@ -10,7 +10,7 @@ exports.getAllUsers = async () => {
   }
 };
 
-exports.updateUser = async (id, user) => {
+export const updateUser = async (id, user) => {
   try {
     const { username, surname, phone, email } = user;
     const [rows] = await conn.query(
@@ -24,7 +24,7 @@ exports.updateUser = async (id, user) => {
   }
 };
 
-exports.getEditForm = async (id) => {
+export const getEditForm = async (id) => {
   try {
     const [rows] = await conn.query("SELECT * FROM users WHERE id = ?", [id]); // Await the query
     return rows;

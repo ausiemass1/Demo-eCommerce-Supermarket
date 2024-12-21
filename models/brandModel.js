@@ -1,6 +1,6 @@
-const conn = require("../config/dbConfig");
+import conn from "../config/dbConfig.js";
 
-exports.getBrands = async () => {
+export const getBrands = async () => {
   try {
     const sql = "SELECT * FROM brands";
     const [rows] = await conn.execute(sql);
@@ -10,7 +10,7 @@ exports.getBrands = async () => {
   }
 };
 
-exports.insertBrand = async (brand) => {
+export const insertBrand = async (brand) => {
   try {
     const sql = "INSERT INTO brands(brand_name) VALUES(?)";
     const [rows] = await conn.execute(sql,[brand]);
@@ -20,14 +20,14 @@ exports.insertBrand = async (brand) => {
   }
 };
 
-exports.editBrand = async (id) => {
+export const editBrand = async (id) => {
   const brandId = id;
   const sql = "SELECT * FROM brands WHERE brand_id = ?";
   const [rows] = await conn.execute(sql, [brandId]);
   return rows;
 };
 
-exports.updateBrand = async (id, brand) => {
+export const updateBrand = async (id, brand) => {
   const brandId = id;
   const brand_name = brand;
 
@@ -36,7 +36,7 @@ exports.updateBrand = async (id, brand) => {
   return rows;
 };
 
-exports.deleteBrand = async (id) => {
+export const deleteBrand = async (id) => {
   const sql = "DELETE FROM brands WHERE brand_id = ?";
   const [rows] = await conn.execute(sql, [id]);
   return rows;

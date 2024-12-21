@@ -1,8 +1,8 @@
-const crypto = require("crypto");
-const forgotPasswordController = require("../controllers/forgotPasswordController");
-const conn = require("../config/dbConfig");
+import crypto  from "crypto";
+import * as forgotPasswordController from "../controllers/forgotPasswordController.js";
+import conn from "../config/dbConfig.js";
 
-exports.forgotPassword = async (email) => {
+export const forgotPassword = async (email) => {
   // Generate a unique token
   const resetToken = crypto.randomBytes(32).toString("hex");
   const tokenExpiry = new Date(Date.now() + 60 * 60 * 1000); // 1-hour expiry
@@ -12,6 +12,6 @@ exports.forgotPassword = async (email) => {
   return { rows, resetToken };
 };
 
-exports.getResetpasswordForm = async (id)=>{
+export const getResetpasswordForm = async (id)=>{
 
 }

@@ -1,8 +1,8 @@
 
-const conn = require('../config/dbConfig')
+import conn from '../config/dbConfig.js';
 
 
 
-exports.test = async (req,res)=>{
+export async function test(req,res){
     res.render('user/paymentOptions');
 }

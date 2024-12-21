@@ -1,5 +1,5 @@
-const searchModel = require('../models/searchModel')
-const conn = require('../config/dbConfig')
+// const searchModel = require('../models/searchModel')
+// const conn = require('../config/dbConfig')
 
 // exports.searchProduct = async (req,res)=>{
 //     const searchTerm = req.query.search || "";

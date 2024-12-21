@@ -1,16 +1,15 @@
-const axios = require('axios')
-const dotenv = require('dotenv');
+import axios from 'axios';
+import dotenv from 'dotenv';
+import * as cartModel from '../models/cartModel.js';
+
 dotenv.config();
-const cartModel = require('../models/cartModel')
-
-
 
 
 //paypal payment
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
 const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET;
 
-exports.cart = async (req, res) => {
+export const cart = async (req, res) => {
   const cart = req.session.cart || [];
   const cartCount = req.session.cart ? req.session.cart.length : 0;
   const totalPrice = cart.reduce(
@@ -21,7 +20,7 @@ exports.cart = async (req, res) => {
 
 };
 //====================Add to Cart===============//
-exports.addToCart = async (req, res) => {
+export const addToCart = async (req, res) => {
   const productId = req.params.id;
   const quantity = parseInt(req.body.quantity);
 
@@ -46,11 +45,11 @@ exports.addToCart = async (req, res) => {
   }
 };
 
-exports.payment =  (req,res)=>{
+export const payment =  (req,res)=>{
   res.render('user/payment');
 }
 
-exports.removeFromCart = (req, res) => {
+export const removeFromCart = (req, res) => {
   const productId = parseInt(req.params.id);
   req.session.cart = req.session.cart.filter((item) => item.id !== productId);
   req.flash("error_msg", "product removed from cart successfully!");
@@ -59,7 +58,7 @@ exports.removeFromCart = (req, res) => {
 
 //=====================paypal processing=====================//
 // PayPal payment route
-exports.confirmPayment = async (req, res) => {
+export const confirmPayment = async (req, res) => {
   const cart = req.session.cart || [];
   const totalPrice = cart.reduce(
     (total, item) => total + item.price * item.quantity,
@@ -111,7 +110,7 @@ exports.confirmPayment = async (req, res) => {
 };
 
 //capture paypal payment
-exports.paypalSuccess = async (req, res) => {
+export const paypalSuccess = async (req, res) => {
   const token = req.query.token;
 
   try {
@@ -137,7 +136,7 @@ exports.paypalSuccess = async (req, res) => {
   }
 }
 // Cancel route
-exports.paypalCancel = async (req, res) => {
+export const paypalCancel = async (req, res) => {
   req.flash('error_msg', "Payment Cancelled!");
   res.redirect('/payment');
 };
@@ -164,7 +163,7 @@ async function getAccessToken() {
 
 //=====================Google pay=====================//
 
-exports.processGooglepay = async (req, res) => {
+export const processGooglepay = async (req, res) => {
   const paymentData = req.body;
   
   console.log('Payment Data Received:', paymentData);

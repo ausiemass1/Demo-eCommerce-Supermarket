@@ -1,4 +1,4 @@
-const mysql = require('mysql2/promise');
+import mysql from 'mysql2/promise';
 
 
 const conn = mysql.createPool({
@@ -9,4 +9,4 @@ const conn = mysql.createPool({
 })
 
 
-module.exports = conn;
+export default conn;

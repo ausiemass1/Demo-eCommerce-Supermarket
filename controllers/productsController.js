@@ -1,19 +1,20 @@
-const fileUpload = require("express-fileupload");
-const fs = require("fs");
-const path = require("path");
-const conn = require("../config/dbConfig");
-const productsModel = require("../models/productsModel");
+import fileUpload from 'express-fileupload';
+import fs from 'fs';
+import path from 'path';
+import conn from '../config/dbConfig.js';
+import * as  productsModel  from '../models/productsModel.js';
 
-exports.getAllProducts = async (req, res) => {
-  try {
-    const results = await productsModel.getAllProducts();
-    res.render("user/products", { results });
-  } catch (error) {
-    console.log(error);
-  }
-};
 
-exports.getAllProductForAdmin = async (req, res) => {
+// export const getAllProducts = async (req, res) => {
+//   try {
+//     const results = await productsModel.getAllProducts();
+//     res.render("user/products", { results });
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
+
+export const getAllProductForAdmin = async (req, res) => {
   try {
     const results = await productsModel.getAllProducts();
     res.render("admin/productsAll", { results });
@@ -22,19 +23,19 @@ exports.getAllProductForAdmin = async (req, res) => {
   }
 };
 
-exports.getProductForm = async (req, res) => {
+export const getProductForm = async (req, res) => {
   const { brand, category } = await productsModel.getProductForm();
   console.log(brand);
   res.render("admin/productInsert", { brand, category });
 };
 
-exports.editProduct = async (req, res) => {
+export const editProduct = async (req, res) => {
   const results = await productsModel.editProduct(req.params.id);
   console.log(results[0]);
   res.render("admin/productEdit", { results: results[0] });
 };
 
-exports.updateProduct = async (req, res) => {
+export const updateProduct = async (req, res) => {
   const pid = req.params.id;
   const { product_name, description, keywords, category_id, brand_id, price } =
     req.body;
@@ -66,13 +67,13 @@ exports.updateProduct = async (req, res) => {
   res.redirect("/admin/products");
 };
 
-exports.deleteProduct = async (req, res) => {
+export const deleteProduct = async (req, res) => {
   const prodId = req.params.id;
   await productsModel.deleteProduct(prodId);
   res.redirect("/admin/products");
 };
 
-exports.insertproduct = async (req, res) => {
+export const insertproduct = async (req, res) => {
   const { product_name, description, keywords, category_id, brand_id, price } =
     req.body;
 
@@ -106,31 +107,7 @@ exports.insertproduct = async (req, res) => {
 };
 
 
-//pagenation 
-
-
-
-// exports.getProductsPage = (req, res) => {
-//   const page = parseInt(req.query.page) || 1; // Default to page 1
-//   const limit = 6; // Limit products per page
-//   const offset = (page - 1) * limit;
-
-//   // Fetch paginated products
-//   productsModel.getPaginatedProducts(limit, offset, (err, products) => {
-//     if (err) return res.status(500).send(err);
-
-//     // Fetch total product count for pagination
-//     productsModel.getTotalProductCount((err, total) => {
-//       if (err) return res.status(500).send(err);
-
-//       const totalPages = Math.ceil(total / limit);
-//       res.render('user/products', { products, currentPage: page, totalPages });
-//     });
-//   });
-// };
-
-
-exports.getAllProducts = async (req, res) => {
+export const getAllProducts = async (req, res) => {
   try {
     const page = parseInt(req.query.page, 10) || 1; // Default to page 1
     const limit = 6; // Number of products per page

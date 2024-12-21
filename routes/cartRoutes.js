@@ -1,6 +1,8 @@
-const express = require('express');
+import express from 'express';
+import * as  cartController from '../controllers/cartController.js';
+
 const router = express.Router();
-const cartController = require('../controllers/cartController');
+
 
 router.get('/cart', cartController.cart);
 router.post('/add-to-cart/:id', cartController.addToCart)
@@ -13,4 +15,4 @@ router.get('/cancel', cartController.paypalCancel)
 //=====================Google Pay processing=====================//
 router.get('/process-payment', cartController.processGooglepay)
 
-module.exports = router;
+export default router

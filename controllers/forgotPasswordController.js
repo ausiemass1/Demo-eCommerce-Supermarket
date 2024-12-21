@@ -1,17 +1,19 @@
-const dotenv = require("dotenv");
-const bcrypt = require("bcrypt");
-const nodemailer = require("nodemailer");
+import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
+import nodemailer from 'nodemailer';
+import conn from '../config/dbConfig.js';
+import * as  forgotPasswordModel  from '../models/forgotPasswordModel.js';
+
 dotenv.config();
-const conn = require("../config/dbConfig");
-const forgotPasswordModel = require('../models/forgotPasswordModel')
+
 
 // Display the forgot password form
-exports.getforgotPasswordForm = (req, res) => {
+export const getforgotPasswordForm = (req, res) => {
   res.render("user/forgot_password");
 };
 
 // Handle forgot password form submission
-exports.forgotPassword = async (req, res) => {
+export const forgotPassword = async (req, res) => {
   const { email } = req.body;
 
 const {rows, resetToken} = await forgotPasswordModel.forgotPassword(req.body.email)
@@ -44,7 +46,7 @@ const {rows, resetToken} = await forgotPasswordModel.forgotPassword(req.body.ema
 };
 
 // Display the reset password form
-exports.getResetpasswordForm = async (req, res) => {
+export const getResetpasswordForm = async (req, res) => {
   const { token } = req.params;
 
   // Check if the token is valid and not expired
@@ -60,7 +62,7 @@ exports.getResetpasswordForm = async (req, res) => {
 };
 
 // Handle reset password form submission
-exports.resetPassword = async (req, res) => {
+export const resetPassword = async (req, res) => {
   const { token, password } = req.body;
 
   // Hash the new password

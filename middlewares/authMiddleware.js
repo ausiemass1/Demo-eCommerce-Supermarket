@@ -10,5 +10,5 @@ function isAuthenticated(req, res, next) {
     res.redirect("/auth/login"); // Redirect to login if not authenticated
   }
   
-  module.exports = { isAuthenticated };
+  export default { isAuthenticated };
   

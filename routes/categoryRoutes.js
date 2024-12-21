@@ -1,6 +1,6 @@
-const express = require('express')
-const router = express.Router()
- const categoryController = require('../controllers/categoryController')
+import express from 'express';
+const router = express.Router();
+import * as  categoryController  from '../controllers/categoryController.js';
 
 router.get('/admin/categories', categoryController.getCategories);
 router.get('/admin/insertCategories', categoryController.getInsertForm)
@@ -9,4 +9,4 @@ router.get('/admin/editcategory/:id', categoryController.editCategory)
 router.post('/admin/editcategory/:id', categoryController.updateCategory)
 router.get('/admin/deletecategory/:id', categoryController.deleteCategory)
 
-module.exports = router;
+export default router;

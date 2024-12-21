@@ -1,11 +1,10 @@
 
-const nodemailer = require('nodemailer');
-const dotenv = require('dotenv');
+import  nodemailer from  'nodemailer';
+import  dotenv from  'dotenv';
 dotenv.config();
 
-
 //============get contact form=============//
-exports.contactForm = (req, res) => {
+export const contactForm = (req, res) => {
     try {
         res.render('user/contact');
     } catch (error) {
@@ -14,10 +13,8 @@ exports.contactForm = (req, res) => {
     }
 };
 
-
-
 //-----------------  Sending mail using contact page ----------------- //
-exports.sendMessage =  async (req, res) => {
+export const sendMessage =  async (req, res) => {
   const { name, email, message } = req.body;
 
   try {

@@ -1,6 +1,8 @@
-const express = require('express');
-const router =express.Router();
-const authController = require('../controllers/authController')
+import express from 'express';
+import * as authController from '../controllers/authController.js';
+
+const router = express.Router();
+
 
 router.post('/auth/', authController.login)
 router.get('/auth/login', authController.loginForm)
@@ -11,4 +13,4 @@ router.get('/auth/github',authController.githubAuth)
 router.get('/auth/github/callback', authController.githubCallback)
 // router.get('/auth/admin/dashboard', authController.admi)
 
-module.exports = router;
+export default router;

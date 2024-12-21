@@ -1,13 +1,14 @@
-const conn = require("../config/dbConfig");
-const userModel = require("../models/usersModel");
-const bcrypt = require("bcrypt");
+import conn from '../config/dbConfig.js';
+import * as userModel  from '../models/usersModel.js';
+import bcrypt from 'bcrypt';
 
-exports.getAllUsers = async (req, res) => {
+
+export const getAllUsers = async (req, res) => {
   const users = await userModel.getAllUsers();
   res.render("admin/users", { users });
 };
 
-exports.getUserRegForm = (req, res) => {
+export const getUserRegForm = (req, res) => {
 try{
   res.render("admin/register");
 }catch(error){
@@ -16,7 +17,7 @@ try{
 
 };
 
-exports.registerUser = async (req, res) => {
+export const registerUser = async (req, res) => {
   const { username, surname, phone, password, confirm_password, email } =
     req.body;
 
@@ -36,7 +37,7 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-exports.getEditForm = async (req, res) => {
+export const getEditForm = async (req, res) => {
   try {
     const uid = req.params.id; // Get the user ID from the request params
     const results = await userModel.getEditForm(uid);
@@ -47,13 +48,13 @@ exports.getEditForm = async (req, res) => {
   }
 };
 
-exports.updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
   uid = req.params.id;
  const users = await userModel.updateUser(uid, req.body);
   res.redirect("/admin/users");
 };
 
-exports.deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
   uid = req.params.id;
   const [rows] = await conn.query("DELETE FROM users WHERE id = ?", [uid]);
   res.redirect("/admin/users");

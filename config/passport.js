@@ -1,7 +1,8 @@
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const GitHubStrategy = require("passport-github2").Strategy;
-const authModel = require('../models/authModel');
+
+import passport from 'passport';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import { Strategy as GitHubStrategy } from 'passport-github2';
+import * as authModel from '../models/authModel.js';
 //Google strategy Login
 passport.use(
   new GoogleStrategy(

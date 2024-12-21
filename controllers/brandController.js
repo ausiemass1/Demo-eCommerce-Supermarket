@@ -1,7 +1,9 @@
-const brandModel = require("../models/brandModel");
-const conn = require("../config/dbConfig");
 
-exports.getBrands = async (req, res) => {
+
+import * as brandModel from '../models/brandModel.js';
+import conn from '../config/dbConfig.js';
+
+export const getBrands  = async (req, res) => {
   try {
     const results = await brandModel.getBrands();
     res.render("admin/brands.ejs", { results }); // TO DO: brands.ejs to be created
@@ -10,7 +12,7 @@ exports.getBrands = async (req, res) => {
   }
 };
 
-exports.editBrand = async (req, res) => {
+export const editBrand = async (req, res) => {
   try {
     const brandId = req.params.id;
     const results = await brandModel.editBrand(brandId);
@@ -19,7 +21,7 @@ exports.editBrand = async (req, res) => {
     console.log("Error retriving edit Form:", error);
   }
 };
-exports.updateBrand = async (req,res)=>{
+export const updateBrand = async (req,res)=>{
     try{
         const brandId = req.params.id;
 
@@ -32,16 +34,16 @@ exports.updateBrand = async (req,res)=>{
     }
 };
 
-exports.insertBrandForm = (req, res)=>{
+export const insertBrandForm = (req, res)=>{
   res.render('admin/brandInsert')
 };
-exports.insertBrand = async (req,res)=>{
+export const insertBrand = async (req,res)=>{
   await brandModel.insertBrand(req.body.brand_name);
   req.flash('success_msg', "Brand inserted successfully");
   res.redirect('/admin/insertbrand')
 };
 
-exports.deleteBrand = async (req,res)=>{
+export const deleteBrand = async (req,res)=>{
   const brandId  = req.params.id;
   await brandModel.deleteBrand(brandId);
   res.redirect('/admin/brand')

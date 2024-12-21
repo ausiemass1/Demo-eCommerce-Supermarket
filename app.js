@@ -1,29 +1,30 @@
-const express = require('express');
-const app = express();
-const session = require('express-session');
-const fileUpload = require('express-fileupload');
-const flash = require('connect-flash');
-const nodemailer = require('nodemailer'); //used in contact routes, to be removed
-const bcrypt = require('bcrypt'); //used in auth routes , to be removed
-const axios = require('axios') // used in paypal, to be removed
-const dotenv = require('dotenv').config();
-const usersRoutes = require('./routes/usersRoutes');
-const authRoutes = require('./routes/authRoutes');
-const contactRoutes = require('./routes/contactRoutes');
-const productsRoutes = require('./routes/productsRoutes');
-const homeRoutes = require('./routes/homeRoutes');
-const cartRoutes = require('./routes/cartRoutes');
-const categoryRoutes = require('./routes/categoryRoutes');
-const brandRoutes = require('./routes/brandRoutes')
-const logoutRoutes = require('./routes/logoutRoutes')
-const forgotPasswordRoutes = require('./routes/forgotPasswordRoutes')
-const {flashMessages, cartDetails, username } = require('./middlewares/flashMessages');
-const searchRoutes = require('./routes/searchRoutes')
-const testRoutes = require('./routes/testRoutes');
-const passport = require('passport');
-require('./config/passport'); // Import Passport configuration
+import express from 'express';
+import session from 'express-session';
+import fileUpload from 'express-fileupload';
+import flash from 'connect-flash';
+import dotenv from 'dotenv';
+dotenv.config();
 
-const conn = require('./config/dbConfig'); // to be removed  in production. only used for tesing purposes
+import usersRoutes from './routes/usersRoutes.js';
+import authRoutes from './routes/authRoutes.js';
+import contactRoutes from './routes/contactRoutes.js';
+import productsRoutes from './routes/productsRoutes.js';
+import homeRoutes from './routes/homeRoutes.js';
+import cartRoutes from './routes/cartRoutes.js';
+import categoryRoutes from './routes/categoryRoutes.js';
+import brandRoutes from './routes/brandRoutes.js';
+import logoutRoutes from './routes/logoutRoutes.js';
+import forgotPasswordRoutes from './routes/forgotPasswordRoutes.js';
+import { flashMessages, cartDetails, username } from './middlewares/flashMessages.js';
+import searchRoutes from './routes/searchRoutes.js';
+import testRoutes from './routes/testRoutes.js';
+
+import passport from 'passport';
+import './config/passport.js'; // Import Passport configuration
+import conn from './config/dbConfig.js'; // Remove in production; only used for testing purposes
+
+const app = express();
+
 
 //Session variables
 const SESSION_SECRET = process.env.SESSION_SECRET;

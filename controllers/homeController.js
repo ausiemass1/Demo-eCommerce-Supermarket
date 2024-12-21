@@ -1,6 +1,6 @@
-const conn = require("../config/dbConfig");
+import conn from "../config/dbConfig.js";
 
-exports.getPagenation = async (req, res) => {
+export const getPagenation = async (req, res) => {
   
   const searchTerm = req.query.search || "";
   const resultsPerPage = 3;
@@ -32,12 +32,12 @@ exports.getPagenation = async (req, res) => {
   });
 };
 
-exports.adminDashboard = async (req, res) => {
+export const adminDashboard = async (req, res) => {
   // Pass the product ratings and weeklt sales data to the EJS template
   res.render("admin/dashboard");
 };
 
-exports.home = async (req, res) => {
+export const home = async (req, res) => {
   const sql = "SELECT * FROM products";
   const [results] = await conn.query(sql);
   res.render("user/index", { results });

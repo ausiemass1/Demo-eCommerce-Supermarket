@@ -1,11 +1,11 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const homeController = require('../controllers/homeController');
+import * as  homeController from '../controllers/homeController.js';
 
 
 router.get('/', homeController.home);
 router.get('/admin/dashboard', homeController.adminDashboard);
 
-module.exports = router;
+export default router
 
 
