@@ -9,6 +9,9 @@ dotenv.config();
 const PAYPAL_CLIENT_ID = process.env.PAYPAL_CLIENT_ID;
 const PAYPAL_CLIENT_SECRET = process.env.PAYPAL_CLIENT_SECRET;
 
+
+
+//cart display
 export const cart = async (req, res) => {
   const cart = req.session.cart || [];
   const cartCount = req.session.cart ? req.session.cart.length : 0;
@@ -40,8 +43,8 @@ export const addToCart = async (req, res) => {
       // If the product is not in the cart, add it
       req.session.cart.push({ ...product, quantity });
     }
-    res.redirect("/");
-   
+    res.redirect(`${req.headers.referer}#product-${productId}`);
+
   }
 };
 
@@ -64,6 +67,8 @@ export const confirmPayment = async (req, res) => {
     (total, item) => total + item.price * item.quantity,
     0
   );
+  const return_url = `${process.env.BASE_URL}/success`;
+  const cancel_url = `${process.env.BASE_URL}/cancel`;
 
   try {
       // Step 1: Create the order with experience context
@@ -86,8 +91,8 @@ export const confirmPayment = async (req, res) => {
                   landing_page: "BILLING", // Can be "LOGIN" or "BILLING"
                   shipping_preference: "NO_SHIPPING", // "GET_FROM_FILE", "NO_SHIPPING", or "SET_PROVIDED_ADDRESS"
                   user_action: "PAY_NOW", // Shows a "Pay Now" button instead of "Continue"
-                  return_url: "http://localhost:3000/success",
-                  cancel_url: "http://localhost:3000/cancel",
+                  return_url: return_url,
+                  cancel_url: cancel_url,
               },
           },
           {

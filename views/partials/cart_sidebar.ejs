@@ -1,6 +1,22 @@
 <div id="cart-sidebar" class="cart-sidebar hidden hide-on-med-and-down">
  
     <br><br>
+    <% if (cartCount === 0){%>
+      <div class="container center-align">
+        <h3>Your shopping cart is empty!</h3>
+        <div class="checkout_continue">
+          <a
+            href="/"
+            class="btn waves-effect waves-light"
+            type="submit"
+            name="action"
+            >Continue Shopping
+            <i class="material-icons right"> shopping_basket</i>
+          </a>
+        </div>
+      </div>
+      <%} else { %> 
+
     <table class="responsive-table">
       <thead>
         <tr>
@@ -40,7 +56,7 @@
         <% }) %>
       </tbody>
     </table>
-  
+   
     <br /><br />
   
     <h3>Subtotal: $<%= totalPrice.toFixed(2) %></h3>
@@ -65,4 +81,4 @@
       </a>
     </div>
   </div>
-  
+  <%} %> 

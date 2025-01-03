@@ -66,6 +66,8 @@ export const googleCallback = passport.authenticate("google", {
   failureRedirect: "/auth/login",
 });
 
+//get  github login
+
 export const githubAuth = passport.authenticate("github", {
   scope: ["profile", "email"],
 });
