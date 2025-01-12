@@ -1,0 +1,59 @@
+
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Grid container styles */
+.grid-container {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+  min-height: 100vh; /* Full viewport height */
+}
+
+header {
+  grid-area: header;
+  color: white;
+  text-align: center;
+  /* padding: 1rem; */
+}
+
+main {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  grid-template-areas: "section content";
+  gap: 1rem;
+  padding: 1rem;
+}
+
+#sectionadmin {
+
+  background: #f4f4f4;
+  padding: 1rem;
+}
+
+#contentadmin {
+  background-color: white; /* Explicit white background */
+  padding: 20px; /* Add some padding for spacing */
+   min-height: 100vh; /* Make sure it stretches to full viewport height */
+}
+
+footer {
+  grid-area: footer;
+  background: #333;
+  color: white;
+  text-align: center;
+  /* padding: 1rem; */
+}

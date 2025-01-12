@@ -31,7 +31,6 @@ export const getProductForm = async (req, res) => {
 
 export const editProduct = async (req, res) => {
   const results = await productsModel.editProduct(req.params.id);
-  console.log(results[0]);
   res.render("admin/productEdit", { results: results[0] });
 };
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid Layout Template</title>
+  <%- include("../partials/user_head.ejs") %>
+ <link rel="stylesheet" href="../../public/css/test.css">
+</head>
+<body>
+  <div class="grid-container">
+    <header>
+        <%- include('../partials/admin_navbar1.ejs')%>
+    </header>
+    <main>
+      <section id="sectionadmin" class="col s12 m2 l2 hide-on-med-and-down">
+        <h2>Section</h2>
+        <p>This is the section area.</p>
+      </section>
+      <div id="contentadmin" class="col s12 m10 l10 grey lighten-4">
+        <h2>Main Content</h2>
+        <p>This is the main content area.</p>
+      </div>
+    </main>
+    <%- include('../partials/footer.ejs')%>
+  </div>
+</body>
+
+
+<%- include("../partials/admin_foot.ejs") %>
+</html>

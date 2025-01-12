@@ -18,6 +18,7 @@ import forgotPasswordRoutes from './routes/forgotPasswordRoutes.js';
 import { flashMessages, cartDetails, username } from './middlewares/flashMessages.js';
 import searchRoutes from './routes/searchRoutes.js';
 import testRoutes from './routes/testRoutes.js';
+import myAccountRoutes from './routes/myAccountRoutes.js';
 
 import passport from 'passport';
 import './config/passport.js'; // Import Passport configuration
@@ -64,6 +65,7 @@ app.use(logoutRoutes);
 app.use(forgotPasswordRoutes);
 app.use(searchRoutes);
 app.use(testRoutes);
+app.use(myAccountRoutes);
 
 const PORT = 3000;
 app.listen(3000, ()=>console.log(`app is running on port ${PORT}`))
