@@ -10,7 +10,7 @@ export const getAllUsers = async (req, res) => {
 
 export const getUserRegForm = (req, res) => {
 try{
-  res.render("admin/register");
+  res.render("user/register");
 }catch(error){
   console.log(error)
 }
@@ -29,11 +29,11 @@ export const registerUser = async (req, res) => {
     );
 
     res.send(
-      `<script>alert("Data inserted successfully"); window.location.href = "/admin/users"; </script>`
+      `<script>alert("Data inserted successfully"); window.location.href = "/auth/login"; </script>`
     );
   } else {
     req.flash("error_msg", "Passwords do not match");
-    res.redirect("/admin/register");
+    res.redirect("/user/register");
   }
 };
 
@@ -49,13 +49,13 @@ export const getEditForm = async (req, res) => {
 };
 
 export const updateUser = async (req, res) => {
-  uid = req.params.id;
- const users = await userModel.updateUser(uid, req.body);
+ const uid = req.params.id;
+ await userModel.updateUser(uid, req.body);
   res.redirect("/admin/users");
 };
 
 export const deleteUser = async (req, res) => {
-  uid = req.params.id;
+  const uid = req.params.id;
   const [rows] = await conn.query("DELETE FROM users WHERE id = ?", [uid]);
   res.redirect("/admin/users");
 };

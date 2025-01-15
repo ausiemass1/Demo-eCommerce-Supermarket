@@ -30,7 +30,10 @@ export const login = async (req, res) => {
       if (match) {
         // Set user session and redirect to the appropriate view
         req.session.loggedin = true;
-        req.session.username = user.name;
+        req.session.username = user.username;
+        req.session.UserId = user.id;
+        // req.session.UserId = user.id;
+        // console.log(user.name)
 
         if (user.user_type == 1) {
           req.flash("success_msg", "Successfully logged in!");

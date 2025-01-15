@@ -20,3 +20,8 @@ export function username(req, res, next) {
   next();
 }
 
+export function UserId(req, res, next) {
+  res.locals.UserId = req.session.UserId;
+  next();
+}
+

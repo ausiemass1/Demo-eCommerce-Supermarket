@@ -1,18 +1,7 @@
-import fileUpload from 'express-fileupload';
-import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import conn from '../config/dbConfig.js';
 import * as  productsModel  from '../models/productsModel.js';
-
-
-// export const getAllProducts = async (req, res) => {
-//   try {
-//     const results = await productsModel.getAllProducts();
-//     res.render("user/products", { results });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 export const getAllProductForAdmin = async (req, res) => {
   try {
@@ -42,6 +31,9 @@ export const updateProduct = async (req, res) => {
   image = req.files.image;
   let imageName = `${Date.now()}-${image.name}`;
   let uploadpath;
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
 
   uploadpath = path.join(__dirname, "../public/uploads/products/", imageName);
   image.mv(uploadpath, (err) => {
@@ -75,6 +67,9 @@ export const deleteProduct = async (req, res) => {
 export const insertproduct = async (req, res) => {
   const { product_name, description, keywords, category_id, brand_id, price } =
     req.body;
+    const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 
   let image;
   let uploadpath;
@@ -109,7 +104,7 @@ export const insertproduct = async (req, res) => {
 export const getAllProducts = async (req, res) => {
   try {
     const page = parseInt(req.query.page, 10) || 1; // Default to page 1
-    const limit = 6; // Number of products per page
+    const limit = 8; // Number of products per page
     const offset = (page - 1) * limit; // Calculate offset for pagination
 
     // Fetch paginated products and total product count

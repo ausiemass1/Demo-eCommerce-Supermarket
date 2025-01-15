@@ -38,7 +38,11 @@ export const adminDashboard = async (req, res) => {
 };
 
 export const myAccount = async (req, res) => {
-  const sql = "SELECT * FROM users";
-  const [results] = await conn.query(sql);
-  res.render("admin/myAccount", { results });
+  
+const user = req.session.username
+  const sql = "SELECT * FROM users where username = ?";
+  const [results] = await conn.query(sql, [user]);
+  
+  res.render("admin/myAccount", { results: results[0] });
+  console.log(results)
 };
