@@ -33,8 +33,10 @@ export const getPagenation = async (req, res) => {
 };
 
 export const adminDashboard = async (req, res) => {
-  // Pass the product ratings and weeklt sales data to the EJS template
-  res.render("admin/dashboard");
+  // Pass the product ratings and weekly sales data to the EJS template
+  const sql = "SELECT * from weekly_sales";
+  const [sales] = await conn.query(sql);
+  res.render("admin/dashboard", {sales});
 };
 
 export const home = async (req, res) => {

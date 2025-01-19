@@ -38,10 +38,6 @@ export const findByGoogleId = async (googleId) => {
     return results[0]; // Return the user if found
   };
 
-  // export const insertUser = async (user) => {
-  //   const query = "INSERT INTO google_users SET ?";
-  //   const [result] = await conn.query(query, user);
-  //   return result.insertId; // Return the new user's ID
-  // };
+ 
   
   

@@ -22,6 +22,7 @@ import myAccountRoutes from './routes/myAccountRoutes.js';
 
 import passport from 'passport';
 import './config/passport.js'; // Import Passport configuration
+import './config/dbConfig.js'
 import conn from './config/dbConfig.js'; // Remove in production; only used for testing purposes
 
 const app = express();

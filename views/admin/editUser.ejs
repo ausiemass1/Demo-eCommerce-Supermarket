@@ -23,7 +23,7 @@
     <header>
       <!-- place navbar here -->
       <%- include("../partials/admin_navbar1.ejs") %> 
-      <!-- <%- include("../partials/user_navbar2.ejs") %> -->
+     
     </header>
 
     <main>
@@ -46,6 +46,17 @@
     
                 <label for="email">Email:</label>
                 <input type="text" name="email" value="<%= users.email %>" /><br /><br />
+
+               
+
+                <div class="input-field">
+                  <select   name="user_type">
+                    <option value="<%= users.user_type %>" disabled selected  ><%= users.user_type %></option>
+                    <option value="Admin"   >Admin</option>
+                    <option value="User"   >User</option>
+                  </select>
+                  <label for="user_type">Brand</label>
+                </div>
     
                 <input type="submit" value="Update" class="btn btn-primary"/>
     

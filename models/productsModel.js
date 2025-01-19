@@ -1,7 +1,25 @@
 import conn  from "../config/dbConfig.js";
 // view all the products
 export const getAllProducts = async () => {
-  const sql = "SELECT * FROM products";
+  // const sql = "SELECT * FROM products";
+  const sql = `
+  SELECT 
+    products.id, 
+    products.product_name, 
+    products.image, 
+    products.description, 
+    products.keywords, 
+    products.stock,
+    products.price, 
+    categories.category_name, 
+    brands.brand_name
+  FROM 
+    products
+  LEFT JOIN 
+    categories ON products.category_id = categories.category_id
+  LEFT JOIN 
+    brands ON products.brand_id = brands.brand_id
+`;
   const [rows] = await conn.execute(sql);
   return rows;
 };
@@ -63,17 +81,28 @@ export const getProductForm = async ()=>{
   return {brand, category};
 }
 
-// Fetch paginated products
-export const getPaginatedProducts = async (limit, offset) => {
-  const sql = 'SELECT * FROM products LIMIT ? OFFSET ?';
-  const [rows] = await conn.query(sql, [limit, offset]); // Destructure rows from the query result
+
+// Fetch paginated products with optional search
+export const getPaginatedProducts = async (limit, offset, searchTerm = "") => {
+  const searchCondition = `%${searchTerm}%`;
+  const sql = `
+    SELECT * FROM products 
+    WHERE description LIKE ? OR keywords LIKE ? OR product_name LIKE ?
+    LIMIT ? OFFSET ?
+  `;
+  const [rows] = await conn.query(sql, [searchCondition, searchCondition,searchCondition, limit, offset]);
   return rows; // Return the fetched rows
 };
 
-// Fetch total product count
-export const getTotalProductCount = async () => {
-  const sql = 'SELECT COUNT(*) AS total FROM products';
-  const [[{ total }]] = await conn.query(sql); // Destructure total from the nested query result
+// Fetch total product count with optional search
+export const getTotalProductCount = async (searchTerm = "") => {
+  const searchCondition = `%${searchTerm}%`;
+  const sql = `
+    SELECT COUNT(*) AS total 
+    FROM products 
+    WHERE description LIKE ? OR keywords LIKE ? OR product_name LIKE ?
+  `;
+  const [[{ total }]] = await conn.query(sql, [searchCondition, searchCondition, searchCondition,]);
   return total; // Return the total count
 };
 

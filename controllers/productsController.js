@@ -3,6 +3,36 @@ import { fileURLToPath } from 'url';
 import conn from '../config/dbConfig.js';
 import * as  productsModel  from '../models/productsModel.js';
 
+// all the product for customer views
+export const getAllProducts = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page, 10) || 1; // Default to page 1
+    const limit = 8; // Number of products per page
+    const offset = (page - 1) * limit; // Calculate offset for pagination
+
+    const searchTerm = req.query.search || ""; // Get search term from query
+
+    // Fetch paginated products and total product count using the model
+    const results = await productsModel.getPaginatedProducts(limit, offset, searchTerm);
+    const totalProducts = await productsModel.getTotalProductCount(searchTerm);
+
+    // Calculate total pages
+    const totalPages = Math.ceil(totalProducts / limit);
+    
+    // Render the products page
+    res.render("user/products", {
+      results,
+      currentPage: page,
+      totalPages,
+      searchTerm,
+    });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("An error occurred while fetching products");
+  }
+};
+
+// all the product for admin views, insert update and delete
 export const getAllProductForAdmin = async (req, res) => {
   try {
     const results = await productsModel.getAllProducts();
@@ -20,15 +50,21 @@ export const getProductForm = async (req, res) => {
 
 export const editProduct = async (req, res) => {
   const results = await productsModel.editProduct(req.params.id);
-  res.render("admin/productEdit", { results: results[0] });
+  const [categories] = await conn.query("SELECT * FROM categories"); 
+  const [brands] = await conn.query("SELECT * FROM brands");
+  res.render("admin/productEdit", { results: results[0], categories, brands});
 };
 
 export const updateProduct = async (req, res) => {
   const pid = req.params.id;
   const { product_name, description, keywords, category_id, brand_id, price } =
     req.body;
-  let image;
-  image = req.files.image;
+
+  let imageName = null;
+
+  // Check if an image was uploaded
+  if (req.files && req.files.image) {
+  let image = req.files.image;
   let imageName = `${Date.now()}-${image.name}`;
   let uploadpath;
 
@@ -39,17 +75,29 @@ export const updateProduct = async (req, res) => {
   image.mv(uploadpath, (err) => {
     if (err) throw err;
   });
+  }
+
+ // Construct the update query
+ const updateFields = {
+  product_name,
+  description,
+  keywords,
+  category_id,
+  brand_id,
+  price,
+};
+
+// Add image to update fields if it exists
+if (imageName) {
+  updateFields.image = imageName;
+}
+
+
 
   const sql =
-    "UPDATE products SET product_name = ?, description = ?, keywords = ?, category_id = ?, brand_id = ?, price = ?, image = ? WHERE id = ? ";
+    "UPDATE products SET ? WHERE id = ? ";
   await conn.query(sql, [
-    product_name,
-    description,
-    keywords,
-    category_id,
-    brand_id,
-    price,
-    imageName,
+    updateFields,
     pid,
   ]);
 
@@ -100,23 +148,3 @@ const __dirname = path.dirname(__filename);
   res.redirect("/admin/insertproduct");
 };
 
-
-export const getAllProducts = async (req, res) => {
-  try {
-    const page = parseInt(req.query.page, 10) || 1; // Default to page 1
-    const limit = 8; // Number of products per page
-    const offset = (page - 1) * limit; // Calculate offset for pagination
-
-    // Fetch paginated products and total product count
-    const results = await productsModel.getPaginatedProducts(limit, offset);
-    const totalProducts = await productsModel.getTotalProductCount();
-
-    // Calculate total pages
-    const totalPages = Math.ceil(totalProducts / limit);
-
-    // Render the products page
-    res.render('user/products', { results, currentPage: page, totalPages });
-  } catch (error) {
-    res.status(500).send(error.message || 'An error occurred while fetching products');
-  }
-};

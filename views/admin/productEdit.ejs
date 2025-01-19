@@ -54,30 +54,31 @@
             />
             <label for="Keywords">Keywords</label>
           </div>
+
+
           <div class="input-field col s12">
-            <input
-              placeholder="Category"
-              id="category"
-              name="category_id"
-              value="<%= results.category_id %>"
-              type="number"
-              class="validate"
-              required
-            />
+            <select name="category_id">
+              <option value="" disabled selected>Select Category</option>
+              <% categories.forEach(category => { %>
+                <option value="<%= category.category_id %>"><%= category.category_name %></option>
+              <% }) %>
+            </select>
+            
             <label for="category">Category</label>
           </div>
-          <div class="input-field col s12">
-            <input
-              placeholder="brand"
-              id="brand"
-              name="brand_id"
-              value="<%= results.brand_id %>"
-              type="number"
-              class="validate"
-     
-            />
-            <label for="brand">Brand</label>
-          </div> 
+       
+            <div class="input-field col s12">
+              <select   name="brand_id">
+                <option value="" disabled selected  >Select Brand</option>
+                <% brands.forEach(brand =>{%>
+                  <option value="<%= brand.brand_id %>"   ><%= brand.brand_name %></option>
+                <%})%>
+              </select>
+              <label for="brand">Brand</label>
+            </div>
+
+
+
           <div class="input-field col s12">
             <input
               placeholder="$0.00"
@@ -108,7 +109,7 @@
         </form><br><br><br>
 
         
-      </div>
+    </div>
     </main>
     
         <!-- place footer here -->

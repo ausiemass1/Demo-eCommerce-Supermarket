@@ -303,3 +303,15 @@ nav ul a {
   background-color: white;
   height: 10rem;
 }
+
+/* Add vertical borders to table cells */
+.custom-table th, 
+.custom-table td {
+  border-right: 1px solid #ddd; /* Add a light border */
+}
+
+/* Remove the right border for the last column */
+.custom-table th:last-child, 
+.custom-table td:last-child {
+  border-right: none;
+}

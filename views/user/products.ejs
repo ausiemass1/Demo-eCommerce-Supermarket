@@ -112,12 +112,15 @@
     </header>
 
     <main>
-      <input
-        type="text"
-        id="search"
-        placeholder="Search products..."
-        onkeyup="myFunction()"
-      />
+      <form method="get" action="/user/products">
+        <input style="width: 200px;" class="browser-default"
+          type="text" 
+          name="search" 
+          placeholder="Search" 
+          value="<%= searchTerm %>"
+        >
+        <button type="submit">Search</button>
+      </form>
 
       <!-- Pagination Controls -->
   <!-- Pagination Controls -->

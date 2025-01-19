@@ -40,12 +40,13 @@
           
               <h3 class="center-align">All Products</h3>
               <%- include("../partials/flash.ejs")  %>
-          <table>
+          <table class="highlight bordered custom-table">
               <thead>
                 <tr>
-                    <th>id</th>
+                    
                     <th>Product Name</th>
                     <th>Image</th>
+                    <th>Price</th>
                     <th>Description</th>
                     <th>Keywords</th>
                     <th>Category</th>
@@ -59,14 +60,14 @@
                 
                 <% results.forEach(product=>{ %>
                   <tr>
-                    <td><%= product.id %></td>
+                   
                     <td><%= product.product_name %></td>
                     <td><img src="../../public/uploads/products/<%= product.image %>" alt="Product image" style="width: 5rem;" ></td>
-                    
+                    <td>$<%= product.price %></td>
                     <td><%= product.description %></td>
                     <td><%= product.keywords %></td>
-                    <td><%= product.category %></td>
-                    <td><%= product.brand %></td>
+                    <td><%= product.category_name %></td>
+                    <td><%= product.brand_name %></td>
                     <td><a href="/admin/editproduct/<%= product.id %>"><i class="material-icons blue-text">edit</i></a></td>
                     <td>         <!-- Modal Trigger -->
                       <a class="waves-effect waves-light modal-trigger" href="#modal1"

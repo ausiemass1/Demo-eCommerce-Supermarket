@@ -35,7 +35,7 @@ export const login = async (req, res) => {
         // req.session.UserId = user.id;
         // console.log(user.name)
 
-        if (user.user_type == 1) {
+        if (user.user_type == "Admin") {
           req.flash("success_msg", "Successfully logged in!");
           return res.redirect("/admin/dashboard");
         } else {

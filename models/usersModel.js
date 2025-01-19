@@ -12,10 +12,10 @@ export const getAllUsers = async () => {
 
 export const updateUser = async (id, user) => {
   try {
-    const { username, surname, phone, email } = user;
+    const { username, surname, phone, email, user_type } = user;
     const [rows] = await conn.query(
-      "UPDATE users SET username = ?, surname=?, phone=?, email=? WHERE id =?",
-      [username, surname, phone, email, id]
+      "UPDATE users SET username = ?, surname=?, phone=?, email=?, user_type=? WHERE id =?",
+      [username, surname, phone, email, user_type, id]
     );
     return rows;
   } catch (error) {
